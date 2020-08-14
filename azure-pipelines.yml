@@ -15,3 +15,10 @@ variables:
 steps:
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
+- task: AzureWebApp@1
+  displayName: 'Azure Web App Deploy'
+  inputs:
+    azureSubscription: $(azureSubscription)
+    appType: webAppLinux
+    appName: $(appName)
+    package: $(System.ArtifactsDirectory)/**/*.zip
